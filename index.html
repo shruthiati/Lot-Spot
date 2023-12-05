@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LOT SPOT</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Logo container -->
+    <div class="logo-container">
+        <img src="texasstatelogo.jpg" alt="Company Logo" class="logo">
+    </div>
+
+    <!-- Top right link to the campus map -->
+    <a href="https://www.parking.txst.edu/map.html" class="top-right-link"><strong>CAMPUS MAP</strong></a>
+
+    <!-- Main container for the parking spot information -->
+    <div class="container">
+        <h1><strong>Lot Spot</strong></h1>
+        <div class="garage-container">
+            <!-- Individual garage information -->
+            <div class="garage-item">
+                <h2><strong>Speck</strong></h2>
+                <p id="lot1_count">Loading...</p>
+            </div>
+            <div class="garage-item">
+                <h2><strong>Pleasant</strong></h2>
+                <p>Open Spots: 21</p>
+            </div>
+            <div class="garage-item">
+                <h2><strong>Tower</strong></h2>
+                <p>Open Spots: 49</p>
+            </div>
+            <div class="garage-item">
+                <h2><strong>Woods</strong></h2>
+                <p>Open Spots: 23</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to fetch the counter value from the server
+        function fetchCounterValue1() {
+            fetch('open_spots_lot1')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('lot1_count').textContent = "Open Spots: " + data;
+                })
+                .catch(error => console.error('Error fetching counter value:', error));
+        }
+    
+        // Fetch the counter value on page load
+        window.onload = fetchCounterValue1;
+    
+        // Set up a timer to update the counter value every 5 seconds
+        setInterval(fetchCounterValue1, 5000);
+    </script>
+</body>
+</html>
